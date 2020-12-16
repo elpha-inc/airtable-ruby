@@ -83,9 +83,9 @@ module Airtable
 
     end
 
-    def update_record_fields(record_id, fields_for_update)
+    def update_record_fields(record_id, fields_for_update, typecast = false)
       result = self.class.patch(worksheet_url + "/" + record_id,
-        :body => { "fields" => fields_for_update }.to_json,
+        :body => { "fields" => fields_for_update, "typecast" => typecast }.to_json,
         :headers => { "Content-type" => "application/json" }).parsed_response
 
       check_and_raise_error(result)
